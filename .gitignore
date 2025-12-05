@@ -1,6 +1,10 @@
 /.git/
 /bin/
 
+# Ignore Maven build output
+/target/
 
+# Ignore Intellij specific files
+.idea/
 
 
