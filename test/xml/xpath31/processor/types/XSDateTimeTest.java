@@ -46,6 +46,16 @@ class XSDateTimeTest {
     }
 
     @Test
+    void typeName() {
+        assertEquals("dateTime", new XSDateTime().typeName());
+    }
+
+    @Test
+    void stringType() {
+        assertEquals("xs:dateTime", new XSDateTime().stringType());
+    }
+
+    @Test
     void lt() throws TransformerException {
         final XSDateTime jan = XSDateTime.parseDateTime("2025-01-28T00:00:00Z");
         final XSDateTime feb = XSDateTime.parseDateTime("2025-02-28T00:00:00Z");
