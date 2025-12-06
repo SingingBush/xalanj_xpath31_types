@@ -1,0 +1,36 @@
+name: Maven
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, reopened, synchronize]
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: build with JDK ${{ matrix.jdk }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        jdk: [ '8', '11', '17', '21', '25' ]
+
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Set up JDK ${{ matrix.jdk }}
+      uses: actions/setup-java@v5
+      with:
+        java-version: ${{ matrix.jdk }}
+        distribution: zulu
+        cache: 'maven'
+
+    - name: Maven Verify
+      run: mvn -B verify
